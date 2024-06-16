@@ -53,14 +53,18 @@ phases:
       - echo $(pwd) 2>&1 | tee -a $BUILD_LOG
 
       # Path readjustment for codebuild testing with fork and setting GOPATH appropriately
-      - cd ../../../..
-      - export GOPATH=$GOPATH:$(pwd)
-      - cd src/github.com
-      - |
-        if [[ $GITHUBUSERNAME != "aws" ]] ; then
-          mv $GITHUBUSERNAME aws
-        fi
-      - cd aws/amazon-ecs-agent
+      #- cd ../../../..
+      #- export GOPATH=$GOPATH:$(pwd)
+      #- cd src/github.com
+      #- |
+      #  if [[ $GITHUBUSERNAME != "aws" ]] ; then
+      #    mv $GITHUBUSERNAME aws
+      #  fi
+      #- cd aws/amazon-ecs-agent
+
+      # Add path to forked directory for POC testing
+      # Remove this line and uncomment the above section before merging to main aws account
+      - cd $GITHUBUSERNAME/amazon-ecs-agent
 
       # Build Windows executable
       - make windows-exe 2>&1 | tee -a $BUILD_LOG
