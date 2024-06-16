@@ -30,13 +30,15 @@ phases:
       - echo $(pwd) 2>&1 | tee -a $BUILD_LOG
 
       # Path readjustment for codebuild testing with fork and setting GOPATH appropriately
-      - cd ../../../..
-      - cd src/github.com
-      - |
-        if [[ $GITHUBUSERNAME != "aws" ]] ; then
-          mv $GITHUBUSERNAME aws
-        fi
-      - cd aws/amazon-ecs-agent
+      #- cd ../../../..
+      #- cd src/github.com
+      #- |
+      #  if [[ $GITHUBUSERNAME != "aws" ]] ; then
+      #    mv $GITHUBUSERNAME aws
+      #  fi
+      #- cd aws/amazon-ecs-agent
+
+# Uncomment the above section before merging to main repo
 
       # Building agent deb
       - GO111MODULE=auto
