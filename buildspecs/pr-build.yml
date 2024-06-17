@@ -74,7 +74,7 @@ phases:
       #- cd aws/amazon-ecs-agent
 
       # Build Windows executable
-      - make windows-exe 2>&1 | tee -a $BUILD_LOG
+      - make codebuild 2>&1 | tee -a $BUILD_LOG
 
       # Build Amazon Linux 2 RPMs
       - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2" 2>&1 | tee -a $BUILD_LOG
