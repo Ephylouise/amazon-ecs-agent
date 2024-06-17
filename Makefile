@@ -108,18 +108,6 @@ docker-release: pause-container-release cni-plugins .out-stamp
 		--rm \
 		"amazon/amazon-ecs-agent-${BUILD}:make"
 
-# Make a Windows release target
-windows-docker-release: .out-stamp
-	@docker build --build-arg GO_VERSION=${GO_VERSION} -f scripts/dockerfiles/Dockerfile.cleanbuild -t "amazon/amazon-ecs-agent-cleanbuild-windows:make" .
-	@docker run --net=none \
-        	--env TARGET_OS="windows" \
-        	--env GO111MODULE=auto \
-        	--user "$(USERID)" \
-        	--volume "$(PWD)/out:/out" \
-        	--volume "$(PWD):/src/amazon-ecs-agent" \
-        	--rm \
-        	"amazon/amazon-ecs-agent-cleanbuild-windows:make"
-
 # Legacy target : Release packages our agent into a "scratch" based dockerfile
 release: certs docker-release
 	@./scripts/create-amazon-ecs-scratch
@@ -398,8 +386,6 @@ get-deps-init:
 	GO111MODULE=on go install github.com/fzipp/gocyclo/cmd/gocyclo@v0.6.0
 	GO111MODULE=on go install honnef.co/go/tools/cmd/staticcheck@v0.4.0
 
-VERSION = $(shell cat ecs-init/ECSVERSION)
-
 amazon-linux-sources.tgz:
 	./scripts/update-version.sh
 	cp packaging/amazon-linux-ami-integrated/ecs-agent.spec ecs-agent.spec
@@ -408,7 +394,7 @@ amazon-linux-sources.tgz:
 	cp packaging/amazon-linux-ami-integrated/amazon-ecs-volume-plugin.conf amazon-ecs-volume-plugin.conf
 	cp packaging/amazon-linux-ami-integrated/amazon-ecs-volume-plugin.service amazon-ecs-volume-plugin.service
 	cp packaging/amazon-linux-ami-integrated/amazon-ecs-volume-plugin.socket amazon-ecs-volume-plugin.socket
-	tar -czf ./sources.tgz ecs-init scripts misc agent amazon-ecs-cni-plugins amazon-vpc-cni-plugins agent-container Makefile VERSION
+	tar -czf ./sources.tgz ecs-init scripts misc agent amazon-ecs-cni-plugins amazon-vpc-cni-plugins agent-container Makefile VERSION RELEASE_COMMIT
 
 .amazon-linux-rpm-integrated-done: amazon-linux-sources.tgz
 	test -e SOURCES || ln -s . SOURCES
@@ -430,13 +416,10 @@ amazon-linux-rpm-integrated: .amazon-linux-rpm-integrated-done
 	find RPMS/ -type f -exec cp {} . \;
 	touch .generic-rpm-integrated-done
 
-# Create windows.exe target
-windows-exe: windows-docker-release
-	TARGET_OS="windows" ./scripts/local-save
-
-
 # Build init rpm
 generic-rpm-integrated: .generic-rpm-integrated-done
+
+VERSION = $(shell cat ecs-init/ECSVERSION)
 
 .generic-deb-integrated-done: get-cni-sources
 	./scripts/update-version.sh
