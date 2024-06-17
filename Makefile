@@ -398,6 +398,8 @@ get-deps-init:
 	GO111MODULE=on go install github.com/fzipp/gocyclo/cmd/gocyclo@v0.6.0
 	GO111MODULE=on go install honnef.co/go/tools/cmd/staticcheck@v0.4.0
 
+VERSION = $(shell cat ecs-init/ECSVERSION)
+
 amazon-linux-sources.tgz:
 	./scripts/update-version.sh
 	cp packaging/amazon-linux-ami-integrated/ecs-agent.spec ecs-agent.spec
@@ -406,7 +408,7 @@ amazon-linux-sources.tgz:
 	cp packaging/amazon-linux-ami-integrated/amazon-ecs-volume-plugin.conf amazon-ecs-volume-plugin.conf
 	cp packaging/amazon-linux-ami-integrated/amazon-ecs-volume-plugin.service amazon-ecs-volume-plugin.service
 	cp packaging/amazon-linux-ami-integrated/amazon-ecs-volume-plugin.socket amazon-ecs-volume-plugin.socket
-	tar -czf ./sources.tgz ecs-init scripts misc agent amazon-ecs-cni-plugins amazon-vpc-cni-plugins agent-container Makefile VERSION RELEASE_COMMIT
+	tar -czf ./sources.tgz ecs-init scripts misc agent amazon-ecs-cni-plugins amazon-vpc-cni-plugins agent-container Makefile VERSION
 
 .amazon-linux-rpm-integrated-done: amazon-linux-sources.tgz
 	test -e SOURCES || ln -s . SOURCES
@@ -435,8 +437,6 @@ windows-exe: windows-docker-release
 
 # Build init rpm
 generic-rpm-integrated: .generic-rpm-integrated-done
-
-VERSION = $(shell cat ecs-init/ECSVERSION)
 
 .generic-deb-integrated-done: get-cni-sources
 	./scripts/update-version.sh
