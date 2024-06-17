@@ -428,11 +428,6 @@ amazon-linux-rpm-integrated: .amazon-linux-rpm-integrated-done
 	find RPMS/ -type f -exec cp {} . \;
 	touch .generic-rpm-integrated-done
 
-# Create windows.exe target
-windows-exe: windows-docker-release
-	TARGET_OS="windows" ./scripts/local-save
-
-
 # Build init rpm
 generic-rpm-integrated: .generic-rpm-integrated-done
 
