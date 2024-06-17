@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     # Github username of the forked repo on which to make builds
-    GITHUBUSERNAME: aws
+    GITHUBUSERNAME: ephylouise
 
 phases:
   install:
@@ -48,8 +48,19 @@ phases:
       - CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver.tar"
       - ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.x86_64.rpm"
       - WINDOWS_EXE="amazon-ecs-agent.exe"
-      - AMZN_LINUX_2_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2.x86_64.rpm"
-      - AMZN_LINUX_2023_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2023.x86_64.rpm"
+      - AMZN_LINUX_2_RPM="amazon-ecs-init-${AGENT_VERSION}-1.${AMZN_LINUX_VERSION}.${architecture}.rpm"
+      - AMZN_LINUX_2023_RPM="amazon-ecs-init-${AGENT_VERSION}-1.${AMZN_LINUX_VERSION}.${architecture}.rpm"
+      
+      # Determine Amazon Linux version
+      - |
+        if grep -q "amzn2" /etc/os-release; then
+          AMZN_LINUX_VERSION="amzn2"
+        elif grep -q "amzn2023" /etc/os-release; then
+          AMZN_LINUX_VERSION="amzn2023"
+        else
+          AMZN_LINUX_VERSION=""
+        fi
+
       - echo $(pwd) 2>&1 | tee -a $BUILD_LOG
 
       # Path readjustment for codebuild testing with fork and setting GOPATH appropriately
@@ -63,10 +74,13 @@ phases:
       #- cd aws/amazon-ecs-agent
 
       # Build Windows executable
-      - make windows-exe 2>&1 | tee -a $BUILD_LOG
+      - make codebuild 2>&1 | tee -a $BUILD_LOG
 
-      # Build Amazon Linux RPMs
-      - make amazon-linux-rpm-integrated 2>&1 | tee -a $BUILD_LOG
+      # Build Amazon Linux 2 RPMs
+      - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2" 2>&1 | tee -a $BUILD_LOG
+
+      # Build Amazon Linux 2023 RPMs
+      - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2023" 2>&1 | tee -a $BUILD_LOG
 
       # Building agent tars
       - GO111MODULE=auto
@@ -74,6 +88,7 @@ phases:
       - make generic-rpm-integrated 2>&1 | tee -a $BUILD_LOG
       - make -C ./ecs-agent/daemonimages/csidriver 2>&1 | tee -a $BUILD_LOG
       - ls
+      
       # Rename artifacts for architecture
       - |
         if [[ $architecture == "arm64" ]] ; then
@@ -82,7 +97,7 @@ phases:
           ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.aarch64.rpm"
           ECS_AGENT_TAR="ecs-agent-arm64-v${AGENT_VERSION}.tar"
           CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver-arm64.tar"
-          AMZN_LINUX_2_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm"
+          AMZN_LINUX_2_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm" 
           AMZN_LINUX_2023_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2023.aarch64.rpm"
         fi
 
