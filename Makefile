@@ -285,7 +285,7 @@ release-agent: get-cni-sources
 codebuild: .out-stamp
 	$(MAKE) release TARGET_OS="linux"
 	TARGET_OS="linux" ./scripts/local-save
-	$(MAKE) docker-release TARGET_OS="windows"
+	$(MAKE) windows-docker-release
 	TARGET_OS="windows" ./scripts/local-save
 
 netkitten:
