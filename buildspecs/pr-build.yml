@@ -48,6 +48,8 @@ phases:
       - CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver.tar"
       - ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.x86_64.rpm"
       - WINDOWS_EXE="amazon-ecs-agent.exe"
+      - AMZN_LINUX_2_RPM="amazon-ecs-init-${AGENT_VERSION}-1.${AMZN_LINUX_VERSION}.${architecture}.rpm"
+      - AMZN_LINUX_2023_RPM="amazon-ecs-init-${AGENT_VERSION}-1.${AMZN_LINUX_VERSION}.${architecture}.rpm"
       
       # Determine Amazon Linux version
       - |
@@ -75,10 +77,10 @@ phases:
       - make windows-exe 2>&1 | tee -a $BUILD_LOG
 
       # Build Amazon Linux 2 RPMs
-      - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2" ARCH=$architecture 2>&1 | tee -a $BUILD_LOG
+      - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2" 2>&1 | tee -a $BUILD_LOG
 
       # Build Amazon Linux 2023 RPMs
-      - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2023" ARCH=$architecture 2>&1 | tee -a $BUILD_LOG
+      - make amazon-linux-rpm-integrated AMZN_LINUX_VERSION="amzn2023" 2>&1 | tee -a $BUILD_LOG
 
       # Building agent tars
       - GO111MODULE=auto
@@ -95,6 +97,8 @@ phases:
           ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.aarch64.rpm"
           ECS_AGENT_TAR="ecs-agent-arm64-v${AGENT_VERSION}.tar"
           CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver-arm64.tar"
+          AMZN_LINUX_2_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm" 
+          AMZN_LINUX_2023_RPM="amazon-ecs-init-${AGENT_VERSION}-1.amzn2023.aarch64.rpm"
         fi
 
   post_build:
@@ -105,8 +109,8 @@ artifacts:
     - $ECS_AGENT_TAR
     - $ECS_AGENT_RPM
     - $WINDOWS_EXE
-    - "ecs-init-${AGENT_VERSION}-1.amzn2.${architecture}.rpm"
-    - "ecs-init-${AGENT_VERSION}-1.amzn2023.${architecture}.rpm"
+    - $AMZN_LINUX_2_RPM
+    - $AMZN_LINUX_2023_RPM
     - $BUILD_LOG
     - $CSI_DRIVER_TAR
   name: $CODEBUILD_RESOLVED_SOURCE_VERSION
