@@ -52,26 +52,26 @@ phases:
       - echo $(pwd) 2>&1 | tee -a $BUILD_LOG
 
       # Path readjustment for codebuild testing with fork and setting GOPATH appropriately
-      #- cd ../../../..
-      #- export GOPATH=$GOPATH:$(pwd)
-      #- cd src/github.com
-      #- |
-      #  if [[ $GITHUBUSERNAME != "aws" ]] ; then
-      #    mv $GITHUBUSERNAME aws
-      #  fi
-      #- cd aws/amazon-ecs-agent
-
-      # Build Windows executable
-      - make windows-docker-release 2>&1 | tee -a $BUILD_LOG
-
-      # Build Amazon Linux 2 RPMs
-      - make amazon-linux-rpm-integrated 2>&1 | tee -a $BUILD_LOG
+      - cd ../../../..
+      - export GOPATH=$GOPATH:$(pwd)
+      - cd src/github.com
+      - |
+        if [[ $GITHUBUSERNAME != "aws" ]] ; then
+          mv $GITHUBUSERNAME aws
+        fi
+      - cd aws/amazon-ecs-agent
 
       # Building agent tars
       - GO111MODULE=auto
       - make release-agent 2>&1 | tee -a $BUILD_LOG
       - make generic-rpm-integrated 2>&1 | tee -a $BUILD_LOG
       - make -C ./ecs-agent/daemonimages/csidriver 2>&1 | tee -a $BUILD_LOG
+
+      # Build Windows executable
+      - make windows-docker-release 2>&1 | tee -a $BUILD_LOG
+
+      # Build Amazon Linux 2 RPMs
+      - make amazon-linux-rpm-integrated 2>&1 | tee -a $BUILD_LOG
       - ls
       
       # Rename artifacts for architecture
