@@ -6,9 +6,6 @@ env:
     GITHUBUSERNAME: ephylouise
 
 phases:
-  pre_build:
-    commands:
-      - git rev-parse HEAD > RELEASE_COMMIT
   install:
     commands:
       - architecture=""
