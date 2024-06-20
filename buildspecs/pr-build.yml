@@ -51,13 +51,12 @@ phases:
       - echo $(pwd) 2>&1 | tee -a $BUILD_LOG
 
       # Path readjustment for codebuild testing with fork and setting GOPATH appropriately
+      - echo "GitHub Username = $GITHUBUSERNAME" 2>&1 | tee -a $BUILD_LOG
       - cd ../../../..
       - export GOPATH=$GOPATH:$(pwd)
       - cd src/github.com
-      - |
-        if [[ $GITHUBUSERNAME != "aws" ]]; then
-          mv $GITHUBUSERNAME aws
-        fi
+      - mv $GITHUBUSERNAME aws
+      - echo "GitHub Username = $GITHUBUSERNAME" 2>&1 | tee -a $BUILD_LOG
       - cd aws/amazon-ecs-agent
 
       # Building agent tars
