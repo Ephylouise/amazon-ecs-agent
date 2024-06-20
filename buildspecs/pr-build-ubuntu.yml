@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     # Github username of the forked repo on which to make builds
-    GITHUBUSERNAME: aws
+    GITHUBUSERNAME: Ephylouise
 
 phases:
   install:
@@ -33,7 +33,7 @@ phases:
       - cd ../../../..
       - cd src/github.com
       - |
-        if [[ $GITHUBUSERNAME != "aws" ]] ; then
+        if [ $GITHUBUSERNAME != "aws" ] ; then
           mv $GITHUBUSERNAME aws
         fi
       - cd aws/amazon-ecs-agent
