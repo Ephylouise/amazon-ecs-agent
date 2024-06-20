@@ -48,7 +48,7 @@ phases:
       #[ commented out for testing ]- CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver.tar"
       #[ commented out for testing ]- ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.x86_64.rpm"
       #[ commented out for testing ]- AMZN_LINUX_2023_RPM="ecs-init-${AGENT_VERSION}-1.amzn2023.x86_64.rpm"
-      - WINDOWS_EXE="amazon-ecs-agent.exe"
+      - WINDOWS_EXE="/out/amazon-ecs-agent.exe"
       - echo $(pwd) 2>&1 | tee -a $BUILD_LOG
 
 
