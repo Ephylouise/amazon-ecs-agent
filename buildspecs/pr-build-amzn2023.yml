@@ -22,7 +22,7 @@ phases:
         esac
 
       # Install GO to ensure version is up-to-date on OS
-      - sudo dnf --releasever=$VERSION update
+      - sudo dnf update -y
       - sudo yum install golang -y
 
       # Set appropriate environment variables
