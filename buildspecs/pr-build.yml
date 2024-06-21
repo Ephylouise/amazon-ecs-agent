@@ -44,7 +44,7 @@ phases:
       - echo "build_id = $CODEBUILD_LOG_PATH" 2>&1 | tee -a $BUILD_LOG
       - echo "Building agent image" 2>&1 | tee -a $BUILD_LOG
       - AGENT_VERSION=$(cat VERSION)
-      #[ commented out for testing ]- ECS_AGENT_TAR="ecs-agent-v${AGENT_VERSION}.tar"
+      - ECS_AGENT_TAR="ecs-agent-v${AGENT_VERSION}.tar"
       #[ commented out for testing ]- CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver.tar"
       #[ commented out for testing ]- ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.x86_64.rpm"
       #[ commented out for testing ]- AMZN_LINUX_2023_RPM="ecs-init-${AGENT_VERSION}-1.amzn2023.x86_64.rpm"
@@ -66,7 +66,7 @@ phases:
 
       # Building agent tars
       - GO111MODULE=auto
-      #[ commented out for testing ]- make release-agent 2>&1 | tee -a $BUILD_LOG
+      - make release-agent 2>&1 | tee -a $BUILD_LOG
       #[ commented out for testing ]- make generic-rpm-integrated 2>&1 | tee -a $BUILD_LOG
       #[ commented out for testing ]- make -C ./ecs-agent/daemonimages/csidriver 2>&1 | tee -a $BUILD_LOG
 
@@ -75,15 +75,17 @@ phases:
 
       # Build Windows executable
       - make windows-docker-release 2>&1 | tee -a $BUILD_LOG
+      - echo "The contents of the /out directory:"
+      - ls -l /out
       - ls
 
       # Rename artifacts for architecture
-      #[ commented out for testing ]- |
-        #[ commented out for testing ]if [[ $architecture == "arm64" ]] ; then
-          #[ commented out for testing ]mv $ECS_AGENT_TAR "ecs-agent-arm64-v${AGENT_VERSION}.tar"
+      |
+        if [[ $architecture == "arm64" ]] ; then
+          mv $ECS_AGENT_TAR "ecs-agent-arm64-v${AGENT_VERSION}.tar"
           #[ commented out for testing ]mv $CSI_DRIVER_TAR "./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver-arm64.tar"
           #[ commented out for testing ]ECS_AGENT_RPM="amazon-ecs-init-${AGENT_VERSION}-1.aarch64.rpm"
-          #[ commented out for testing ]ECS_AGENT_TAR="ecs-agent-arm64-v${AGENT_VERSION}.tar"
+          ECS_AGENT_TAR="ecs-agent-arm64-v${AGENT_VERSION}.tar"
           #[ commented out for testing ]CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver-arm64.tar"
           #[ commented out for testing ]AMZN_LINUX_2023_RPM="ecs-init-${AGENT_VERSION}-1.amzn2023.aarch64.rpm"
         #[ commented out for testing ]fi
@@ -93,7 +95,7 @@ phases:
 
 artifacts:
   files:
-    #[ commented out for testing ]- $ECS_AGENT_TAR
+    - $ECS_AGENT_TAR
     #[ commented out for testing ]- $ECS_AGENT_RPM
     #[ commented out for testing ]- $AMZN_LINUX_2023_RPM
     - $WINDOWS_EXE
