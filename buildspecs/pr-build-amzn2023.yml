@@ -65,6 +65,5 @@ phases:
 
 artifacts:
   files:
-    - $AMZN_LINUX_2_RPM
+    - $AMZN_LINUX_2023_RPM
   name: $CODEBUILD_RESOLVED_SOURCE_VERSION
-
