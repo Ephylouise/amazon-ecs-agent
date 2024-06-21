@@ -89,7 +89,6 @@ phases:
           CSI_DRIVER_TAR="./ecs-agent/daemonimages/csidriver/tarfiles/ebs-csi-driver-arm64.tar"
           AMZN_LINUX_2023_RPM="ecs-init-${AGENT_VERSION}-1.amzn2023.aarch64.rpm"
         fi
-
   post_build:
     commands:
 
