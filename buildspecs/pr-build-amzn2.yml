@@ -27,6 +27,9 @@ phases:
       #- export GOPATH=$HOME/go
       #- export GOBIN=$GOPATH/bin
       #- export PATH=$PATH:$GOROOT/bin:$GOBIN
+
+      # Remove goenv installed version
+      - sudo rm -rf "/root/.goenv"
       - which go | tee -a $BUILD_LOG
       - go version | tee -a $BUILD_LOG
       
