@@ -32,7 +32,8 @@ phases:
       #- export GOPATH=$HOME/go
       #- export GOBIN=$GOPATH/bin
       #- export PATH=$PATH:$GOROOT/bin:$GOBIN
-      - sudo rm -rf "/root/.goenv"
+      - sudo rm -rf /root/.goenv
+      - sudo rm -rf /usr/local/go/bin/go
       - which go | tee -a $BUILD_LOG
       - go version | tee -a $BUILD_LOG
       

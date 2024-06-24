@@ -69,6 +69,7 @@ phases:
 
       # Build Windows executable
       - make docker-release TARGET_OS="windows" 2>&1 | tee -a $BUILD_LOG
+      - cp ./out/amazon-ecs-agent.exe $CODEBUILD_SRC_DIR/
       - echo $(find . -name amazon-ecs-agent.exe)
       - ls
 
