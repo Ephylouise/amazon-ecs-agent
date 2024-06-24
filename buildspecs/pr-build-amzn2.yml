@@ -60,7 +60,7 @@ phases:
       # Rename artifacts for architecture
       - |
         if [[ $architecture == "arm64" ]] ; then
-          AMZN_LINUX_2023_RPM="ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm"
+          AMZN_LINUX_2_RPM="ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm"
         fi
 
   post_build:
