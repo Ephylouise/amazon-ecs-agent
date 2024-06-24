@@ -24,11 +24,12 @@ phases:
       - sudo yum install golang -y
 
       # Set evironment GOROOT based on architecture
-      - if [[ "$(uname -m)" == "x86_64" ]]; then
+      - |
+        if [[ "$(uname -m)" == "x86_64" ]]; then
           export GOROOT=/usr/bin/go
         else
           export GOROOT=/usr/local/go/bin/go
-            fi
+        fi
       - which go | tee -a $BUILD_LOG
       - go version | tee -a $BUILD_LOG
       
