@@ -70,7 +70,7 @@ phases:
       # Build Windows executable
       - make docker-release TARGET_OS="windows" 2>&1 | tee -a $BUILD_LOG
       - echo $(find . -name amazon-ecs-agent.exe)
-      - mv /out/amazon-ecs-agent.exe $CODEBUILD_SRC_DIR/
+      - mv ./out/amazon-ecs-agent.exe $CODEBUILD_SRC_DIR/
       - ls
 
       # Rename artifacts for architecture

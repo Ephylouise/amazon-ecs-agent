@@ -25,11 +25,14 @@ phases:
 
       # Set evironment GOROOT based on architecture
       - |
-        if [[ "$(uname -m)" == "x86_64" ]]; then
-          export GOROOT=/usr/bin/go
+        if [[ $architecture == "amd64" ]]; then
+          export GOROOT=/usr
         else
-          export GOROOT=/usr/local/go/bin/go
+          export GOROOT=/usr/local/go
         fi
+      - export GOPATH=$HOME/go
+      - export GOBIN=$GOPATH/bin
+      - export PATH=$PATH:$GOROOT/bin:$GOBIN
       - which go | tee -a $BUILD_LOG
       - go version | tee -a $BUILD_LOG
       
