@@ -20,19 +20,19 @@ phases:
         esac
 
       # Install GO to ensure version is up-to-date on OS
-      - sudo rm -rf "/root/.goenv"
       - sudo yum install golang -y
 
       # Set evironment GOROOT based on architecture
-      - |
-        if [[ $architecture == "amd64" ]]; then
-          export GOROOT=/usr
-        else
-          export GOROOT=/usr/local/go
-        fi
-      - export GOPATH=$HOME/go
-      - export GOBIN=$GOPATH/bin
-      - export PATH=$PATH:$GOROOT/bin:$GOBIN
+      #- |
+      #  if [[ $architecture == "amd64" ]]; then
+      #    export GOROOT=/usr
+      #  else
+      #    export GOROOT=/usr/local/go
+      #  fi
+      #- export GOPATH=$HOME/go
+      #- export GOBIN=$GOPATH/bin
+      #- export PATH=$PATH:$GOROOT/bin:$GOBIN
+      - sudo rm -rf "/root/.goenv"
       - which go | tee -a $BUILD_LOG
       - go version | tee -a $BUILD_LOG
       
