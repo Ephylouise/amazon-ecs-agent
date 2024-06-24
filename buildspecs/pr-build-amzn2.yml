@@ -21,12 +21,8 @@ phases:
 
       # Install GO to ensure version is up-to-date on OS
       - sudo yum install golang -y
-
-      # Set appropriate environment variables
-      - export GOROOT=/usr/local/go
-      - export GOPATH=$HOME/go
-      - export GOBIN=$GOPATH/bin
-      - export PATH=$PATH:$GOROOT/bin:$GOBIN
+      - sudo rm -rf /root/.goenv # removes default goroot for AMD build
+      - sudo rm -rf /usr/local/go/bin/go # removes default goroot for ARM build
       - which go | tee -a $BUILD_LOG
       - go version | tee -a $BUILD_LOG
       
@@ -57,7 +53,7 @@ phases:
       # Rename artifacts for architecture
       - |
         if [[ $architecture == "arm64" ]] ; then
-          AMZN_LINUX_2023_RPM="ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm"
+          AMZN_LINUX_2_RPM="ecs-init-${AGENT_VERSION}-1.amzn2.aarch64.rpm"
         fi
 
   post_build:
