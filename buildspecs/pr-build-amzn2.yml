@@ -18,8 +18,8 @@ phases:
              architecture="arm64"
            ;;
         esac
-        
-      - GOVERSION="$(cat GO_VERSION)""
+
+      - GOVERSION="$(cat GO_VERSION)"
       - AL23_VERSION="$(curl -s https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/core/releasemd.xml | xmllint --xpath "string(//root/releases/release[last()]/@version)" -)"
       - echo $architecture
       - echo $AL23_VERSION
