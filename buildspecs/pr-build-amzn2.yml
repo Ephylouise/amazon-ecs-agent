@@ -26,12 +26,13 @@ phases:
       - GOVERSION="$(cat GO_VERSION)"
       - echo "GO_VERSION is $(cat GO_VERSION)"
 
+      - distribution_release_al2023=$(curl -s https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/core/releasemd.xml | xmllint --xpath "string(//root/releases/release[last()]/@version)" -)
+
+
       # Use if/then function to install go version depending on Amazon Linux version
       - |
         if [[ "$CODEBUILD_BUILD_IMAGE" == *"amazonlinux:2023"* ]]; then
-          sudo dnf --releasever="2023" install -y golang-${GOVERSION};
-        else
-          sudo yum install -y golang;
+          sudo dnf --releasever="2023" install -y golang-${GOVERSION}
         fi
 
       - sudo rm -rf /root/.goenv # removes default goroot for AMD build
