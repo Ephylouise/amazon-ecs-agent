@@ -19,21 +19,28 @@ phases:
            ;;
         esac
 
-      - GOVERSION="$(cat GO_VERSION)"
+      # Set variables for CodeBuild images for AL2 and AL2023
       - AL23_VERSION="$(curl -s https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/core/releasemd.xml | xmllint --xpath "string(//root/releases/release[last()]/@version)" -)"
+      - AL2_ARM="amazonlinux2-aarch64-standard:2.0"
+      - AL2023_ARM="amazonlinux2-aarch64-standard:3.0"
+      - AL2_AMD="amazonlinux2-x86_64-standard:4.0"
+      - AL2023_AMD="amazonlinux2-x86_64-standard:5.0"
+
       - echo $architecture
       - echo $AL23_VERSION
-      - sudo dnf --releasever="$AL23_VERSION" update -y
-      - sudo yum install -y golang
 
-      # Use if/then function to install go version depending on Amazon Linux version
+      # Install Golang depending on Amazon Linux version
       # AL 2023 uses package manager dnf and AL2 uses package manager yum
-      #- |
-      #  if [[ "$CODEBUILD_BUILD_IMAGE" == *"amazonlinux:2023"* ]]; then
-      #    sudo dnf --releasever="$AL23_VERSION" install -y golang-${GOVERSION}
-      #  else
-      #    sudo yum install -y golang
-      #  fi
+      - |
+        if [[ "$CODEBUILD_BUILD_IMAGE" == *"$AL2023_ARM"* || "$CODEBUILD_BUILD_IMAGE" == *"$AL2023_AMD"* ]]; then
+          sudo dnf --releasever="$AL23_VERSION" update -y
+          sudo yum install -y golang
+        elif [[ "$CODEBUILD_BUILD_IMAGE" == *"$AL2_ARM"* || "$CODEBUILD_BUILD_IMAGE" == *"$AL2_AMD"* ]]; then
+          sudo yum install -y golang
+        else
+          echo "Unsupported Amazon Linux version in the build image: $CODEBUILD_BUILD_IMAGE"
+          exit 1
+        fi
 
       - sudo rm -rf /root/.goenv # removes default goroot for AMD build
       - sudo rm -rf /usr/local/go/bin/go # removes default goroot for ARM build
