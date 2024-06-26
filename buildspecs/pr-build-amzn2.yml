@@ -23,7 +23,7 @@ phases:
       - AL23_VERSION="$(curl -s https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/core/releasemd.xml | xmllint --xpath "string(//root/releases/release[last()]/@version)" -)"
       - echo $architecture
       - echo $AL23_VERSION
-      - sudo dnf --releasever="$AL23_VERSION" install -y
+      - sudo dnf --releasever="$AL23_VERSION" update -y
       - sudo yum install -y golang
 
       # Use if/then function to install go version depending on Amazon Linux version
