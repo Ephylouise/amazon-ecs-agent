@@ -228,7 +228,7 @@ build-ecs-cni-plugins:
 		-u "$(USERID)" \
 		-v "$(PWD)/out/amazon-ecs-cni-plugins:/go/src/github.com/aws/amazon-ecs-cni-plugins/bin/plugins" \
 		-v "$(ECS_CNI_REPOSITORY_SRC_DIR):/go/src/github.com/aws/amazon-ecs-cni-plugins" \
-		"amazon/amazon-ecs-build-ecs-cni-plugins:make"		
+		"amazon/amazon-ecs-build-ecs-cni-plugins:make"
 	@echo "Built amazon-ecs-cni-plugins successfully."
 
 build-vpc-cni-plugins:
