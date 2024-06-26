@@ -4,8 +4,8 @@ env:
   variables:
     # Github username of the forked repo on which to make builds
     GITHUBUSERNAME: Ephylouise
-    GOVERSION: "$(cat GO_VERSION)"
-    AL23_VERSION: "$(curl -s https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/core/releasemd.xml | xmllint --xpath "string(//root/releases/release[last()]/@version)" -)""
+    GOVERSION: $(cat GO_VERSION)
+    AL23_VERSION: $(curl -s https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/core/releasemd.xml | xmllint --xpath "string(//root/releases/release[last()]/@version)" -)
 
 phases:
   install:
