@@ -18,9 +18,15 @@ phases:
              architecture="arm64"
            ;;
         esac
+      # The GO_VERSION is pulling from the wrong branch, Codebuild shows version 1.20.12, possible from branch "27ca59a",
+      # but the correct one is located at amazon-ecs-agent/GO_VERSION on the branch that codebuild is running on
+      # (which is the default branch for the project)
+      # Add echo to find which branch and file Codebuild is pulling the GO_VERSION from
+      - echo "GO_VERSION file location $(pwd)/GO_VERSION"
+      - GOVERSION="$(cat GO_VERSION)"
+      - echo "GO_VERSION is $(cat GO_VERSION)"
 
       # Use if/then function to install go version depending on Amazon Linux version
-      - GOVERSION="$(cat GO_VERSION)"
       - |
         if [[ "$CODEBUILD_BUILD_IMAGE" == *"amazonlinux:2023"* ]]; then
           sudo dnf --releasever="2023" install -y golang-${GOVERSION};
