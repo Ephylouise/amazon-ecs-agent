@@ -54,19 +54,19 @@ Resources:
         # so they have to be listed separately
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -108,19 +108,19 @@ Resources:
         # so they have to be listed separately
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -162,19 +162,19 @@ Resources:
         # so they have to be listed separately
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -216,19 +216,19 @@ Resources:
         # so they have to be listed separately
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -266,19 +266,19 @@ Resources:
         BuildType: BUILD
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -317,19 +317,19 @@ Resources:
         BuildType: BUILD
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -368,19 +368,19 @@ Resources:
         BuildType: BUILD
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
@@ -419,19 +419,19 @@ Resources:
         BuildType: BUILD
         FilterGroups:
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '5080306' # prateekchaudhry
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
               Pattern: '4751028' # fierlion
           - - Type: EVENT
-              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED'
+              Pattern: 'PULL_REQUEST_CREATED,PULL_REQUEST_UPDATED,PULL_REQUEST_REOPENED,PULL_REQUEST_MERGED'
             - Type: BASE_REF
               Pattern: !Sub '^${GithubBranchName}$'
             - Type: ACTOR_ACCOUNT_ID
