@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: A Cloudformation template to build Agent artifacts on PR creation and modification. It spawns CodeBuild projects for different architectures which trigger agent artifact builds for PR creation and modification, and store the artifacts in an S3 bucket.
+Description: A Cloudformation template to build Agent artifacts on PR creation, modification, and merges. It spawns CodeBuild projects for different architectures which trigger agent artifact builds for PR creation, modification, and merges, and store the artifacts in an S3 bucket.
 
 Parameters:
   GithubFullRepoName:
@@ -31,7 +31,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (AMD/x86_64). Builds are triggered by PR creation and updates, and artifacts are saved in S3
+      Description: A CodeBuild project to build artifacts (AMD/x86_64). Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'public.ecr.aws/lts/ubuntu:20.04'
@@ -85,7 +85,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (ARM). Builds are triggered by PR creation and updates, and artifacts are saved in S3
+      Description: A CodeBuild project to build artifacts (ARM). Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'public.ecr.aws/lts/ubuntu:20.04'
@@ -139,7 +139,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (ARM). Builds are triggered by PR creation and updates, and artifacts are saved in S3
+      Description: A CodeBuild project to build artifacts (ARM). Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'aws/codebuild/amazonlinux2-aarch64-standard:3.0'
@@ -193,7 +193,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (AMD/x86_64). Builds are triggered by PR creation and updates, and artifacts are saved in S3
+      Description: A CodeBuild project to build artifacts (AMD/x86_64). Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'aws/codebuild/amazonlinux2-x86_64-standard:5.0'
@@ -235,6 +235,8 @@ Resources:
               Pattern: '3102848' # YashdalfTheGray
         Webhook: true
       Visibility: PRIVATE
+
+  # Creates a CodeBuild project for Amazon Linux 2 ARM    
   Amzn2ArmProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -247,7 +249,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (ARM) on Amazon Linux 2. Builds are triggered by PR creation and updates, and artifacts are saved in S3.
+      Description: A CodeBuild project to build artifacts (ARM) on Amazon Linux 2. Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3.
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'aws/codebuild/amazonlinux2-aarch64-standard:2.0'
@@ -258,7 +260,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2Arm
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
@@ -286,6 +288,7 @@ Resources:
         Webhook: true
       Visibility: PRIVATE
 
+  # ACreates a CodeBuild project for Amazon Linux 2 AMD
   Amzn2AmdProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -298,7 +301,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (AMD/x86_64) on Amazon Linux 2. Builds are triggered by PR creation and updates, and artifacts are saved in S3.
+      Description: A CodeBuild project to build artifacts (AMD/x86_64) on Amazon Linux 2. Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3.
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'aws/codebuild/amazonlinux2-x86_64-standard:4.0'
@@ -309,7 +312,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2Amd
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
@@ -337,6 +340,7 @@ Resources:
         Webhook: true
       Visibility: PRIVATE
 
+  # Creates a CodeBuild project for Amazon Linux 2023 ARM
   Amzn2023ArmProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -349,7 +353,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (ARM) on Amazon-Linux 2023. Builds are triggered by PR creation and updates, and artifacts are saved in S3.
+      Description: A CodeBuild project to build artifacts (ARM) on Amazon-Linux 2023. Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3.
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'aws/codebuild/amazonlinux2-aarch64-standard:3.0'
@@ -360,7 +364,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2023Arm
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
@@ -388,6 +392,7 @@ Resources:
         Webhook: true
       Visibility: PRIVATE
 
+  # Creates a CodeBuild project for Amazon Linux 2023 AMD
   Amzn2023AmdProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -400,7 +405,7 @@ Resources:
         Type: S3
       BadgeEnabled: false
       ConcurrentBuildLimit: 10
-      Description: A CodeBuild project to build artifacts (AMD/x86_64) on Amazon-Linux 2023. Builds are triggered by PR creation and updates, and artifacts are saved in S3.
+      Description: A CodeBuild project to build artifacts (AMD/x86_64) on Amazon-Linux 2023. Builds are triggered by PR creation, updates, and merges, and artifacts are saved in S3.
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: 'aws/codebuild/amazonlinux2-x86_64-standard:5.0'
@@ -411,7 +416,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2023Amd
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
