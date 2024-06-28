@@ -235,6 +235,8 @@ Resources:
               Pattern: '3102848' # YashdalfTheGray
         Webhook: true
       Visibility: PRIVATE
+
+  # Creates a CodeBuild project for Amazon Linux 2 ARM    
   Amzn2ArmProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -258,7 +260,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2Arm
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
@@ -286,6 +288,7 @@ Resources:
         Webhook: true
       Visibility: PRIVATE
 
+  # ACreates a CodeBuild project for Amazon Linux 2 AMD
   Amzn2AmdProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -309,7 +312,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2Amd
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
@@ -337,6 +340,7 @@ Resources:
         Webhook: true
       Visibility: PRIVATE
 
+  # Creates a CodeBuild project for Amazon Linux 2023 ARM
   Amzn2023ArmProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -360,7 +364,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2023Arm
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
@@ -388,6 +392,7 @@ Resources:
         Webhook: true
       Visibility: PRIVATE
 
+  # Creates a CodeBuild project for Amazon Linux 2023 AMD
   Amzn2023AmdProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
@@ -411,7 +416,7 @@ Resources:
       QueuedTimeoutInMinutes: 60
       ServiceRole: !Ref ServiceRoleAmzn2023Amd
       Source:
-        BuildSpec: buildspecs/pr-build.yml
+        BuildSpec: buildspecs/pr-build-amzn.yml
         Location: !Ref GithubFullRepoName
         Type: GITHUB
       TimeoutInMinutes: 60
