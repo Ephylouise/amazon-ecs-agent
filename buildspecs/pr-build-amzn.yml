@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     # Github username of the forked repo on which to make builds
-    GITHUBUSERNAME: aws
+    GITHUBUSERNAME: Ephylouise
 
 phases:
   install:
@@ -108,7 +108,7 @@ phases:
       # Rename artifacts for architecture
       - |
         if [[ $architecture == "arm64" ]] ; then
-          AMZN_LINUX_RPM="ecs-init-${AGENT_VERSION}-1.${amzn_version}.aarch64.rpm"
+          AMZN_LINUX_RPM="amazon-ecs-init-${AGENT_VERSION}-1.${amzn_version}.aarch64.rpm"
         fi
 
       # List directory files to view artifacts in build log 
