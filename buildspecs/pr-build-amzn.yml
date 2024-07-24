@@ -51,8 +51,7 @@ phases:
       - sudo rm -rf /root/.goenv
       - sudo rm -rf /usr/local/go/bin/go 
 
-      # Define the Go version to install
-      - GOVERSION="$(cat GO_VERSION)"
+      - make install-golang
 
       # Install Go and define variables based on Amazon Linux version (2 or 2023)
       # Amazon Linux 2023 uses package manager DNF, while older versions use YUM
