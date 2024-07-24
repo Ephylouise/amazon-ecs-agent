@@ -57,29 +57,35 @@ phases:
       # Install Go and define variables based on Amazon Linux version (2 or 2023)
       # Amazon Linux 2023 uses package manager DNF, while older versions use YUM
       # First, try to install the specified Go version, if unable, install latest Go version available
-      - |
-        if [[ "$amzn_version" = "amzn2023" ]]; then
-          sudo dnf --releasever="$AL23_VERSION" update -y
-          echo "Amazon Linux 2023 Version: $AL23_VERSION" 2>&1 | tee -a $BUILD_LOG
-          if sudo dnf install -y golang-$GOVERSION; then
-            echo "Installed Go version: $GOVERSION" 2>&1 | tee -a $BUILD_LOG
-          else
-            echo "Specified Go version $GOVERSION not found, installing latest available version" 2>&1 | tee -a $BUILD_LOG
-            sudo dnf install -y golang
-          fi
+      #- |
+      #  if [[ "$amzn_version" = "amzn2023" ]]; then
+      #    sudo dnf --releasever="$AL23_VERSION" update -y
+      #    echo "Amazon Linux 2023 Version: $AL23_VERSION" 2>&1 | tee -a $BUILD_LOG
+      #    if sudo dnf install -y golang-$GOVERSION; then
+      #      echo "Installed Go version: $GOVERSION" 2>&1 | tee -a $BUILD_LOG
+      #    else
+      #      echo "Specified Go version $GOVERSION not found, installing latest available version" 2>&1 | tee -a $BUILD_LOG
+      #      sudo dnf install -y golang
+      #    fi
 
-        elif [[ "$amzn_version" = "amzn2" ]]; then
-          if sudo yum install -y golang-$GOVERSION; then
-            echo "Installed Go version $GOVERSION" 2>&1 | tee -a $BUILD_LOG
-          else
-            echo "Specified Go version $GOVERSION not found, installing latest available version" 2>&1 | tee -a $BUILD_LOG
-            sudo yum install -y golang
-          fi
+      #  elif [[ "$amzn_version" = "amzn2" ]]; then
+      #    if sudo yum install -y golang-$GOVERSION; then
+      #      echo "Installed Go version $GOVERSION" 2>&1 | tee -a $BUILD_LOG
+      #    else
+      #      echo "Specified Go version $GOVERSION not found, installing latest available version" 2>&1 | tee -a $BUILD_LOG
+      #      sudo yum install -y golang
+      #    fi
 
-        else
-          echo "Unsupported Amazon Linux version"
-          exit 1
-        fi
+      #  else
+      #    echo "Unsupported Amazon Linux version"
+      #    exit 1
+      #  fi
+
+      # Set appropriate environment variables
+      - export GOROOT=/usr/local/go
+      - export GOPATH=$HOME/go
+      - export GOBIN=$GOPATH/bin
+      - export PATH=$PATH:$GOROOT/bin:$GOBIN
 
       # Define the log file with AL version (amzn2 or amzn23) and the architecture
       - BUILD_LOG="build_${amzn_version}_${architecture}.log"
