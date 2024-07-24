@@ -63,6 +63,10 @@ phases:
           echo "Amazon Linux 2023 Version: $AL23_VERSION" 2>&1 | tee -a $BUILD_LOG
         fi
 
+      # Explicitly set the GOROOT and PATH environment variables
+      - export GOROOT=/usr/local/go
+      - export PATH=/usr/local/go/bin:$PATH
+      
        # Install the specified Go version using the install-golang make target
       - make install-golang
 
