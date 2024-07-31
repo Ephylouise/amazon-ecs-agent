@@ -81,10 +81,10 @@ phases:
       #  fi
 
       # Set appropriate environment variables
-      #- export GOROOT=/usr/local/go
-      #- export GOPATH=$HOME/go
-      #- export GOBIN=$GOPATH/bin
-      #- export PATH=$PATH:$GOROOT/bin:$GOBIN
+      - export GOROOT=/usr/local/go
+      - export GOPATH=$HOME/go
+      - export GOBIN=$GOPATH/bin
+      - export PATH=$PATH:$GOROOT/bin:$GOBIN
 
       # Define the log file with AL version (amzn2 or amzn23) and the architecture
       - BUILD_LOG="build_${amzn_version}_${architecture}.log"
