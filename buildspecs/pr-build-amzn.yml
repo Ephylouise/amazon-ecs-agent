@@ -51,7 +51,7 @@ phases:
       - sudo rm -rf /root/.goenv
       - sudo rm -rf /usr/local/go/bin/go 
 
-      - make install-golang
+      - source ./scripts/install-golang.sh
 
       # Install Go and define variables based on Amazon Linux version (2 or 2023)
       # Amazon Linux 2023 uses package manager DNF, while older versions use YUM
@@ -81,10 +81,10 @@ phases:
       #  fi
 
       # Set appropriate environment variables
-      - export GOROOT=/usr/local/go
-      - export GOPATH=$HOME/go
-      - export GOBIN=$GOPATH/bin
-      - export PATH=$PATH:$GOROOT/bin:$GOBIN
+      #- export GOROOT=/usr/local/go
+      #- export GOPATH=$HOME/go
+      #- export GOBIN=$GOPATH/bin
+      #- export PATH=$PATH:$GOROOT/bin:$GOBIN
 
       # Define the log file with AL version (amzn2 or amzn23) and the architecture
       - BUILD_LOG="build_${amzn_version}_${architecture}.log"
